@@ -2,7 +2,7 @@ name: Daily Job Fetcher
 
 on:
   schedule:
- - cron: "55 5 * * *"  # 5:55 AM UTC = 11:25 AM IST
+    - cron: "55 5 * * *" # 5:55 AM UTC = 11:25 AM IST
   workflow_dispatch:
   push:
     branches:
