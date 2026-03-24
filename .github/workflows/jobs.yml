@@ -2,7 +2,7 @@ name: Daily Job Fetcher
 
 on:
   schedule:
-    - cron: "30 5 * * *" # 5:30 AM UTC = 11:00 AM IST
+    - cron: "40 5 * * *" # 5:40 AM UTC = 11:10 AM IST
   workflow_dispatch:
   push:
     branches:
@@ -34,6 +34,6 @@ jobs:
 
       - name: Run fetcher
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: node index.js
