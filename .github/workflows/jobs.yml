@@ -1,0 +1,39 @@
+name: Daily Job Fetcher
+
+on:
+  schedule:
+    - cron: "30 5 * * *" # 5:30 AM UTC = 11:00 AM IST
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Puppeteer system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgbm-dev libnss3 libatk-bridge2.0-0 \
+            libdrm2 libxkbcommon0 libglib2.0-0 \
+            libasound2 libxcomposite1 libxdamage1 \
+            libxfixes3 libxrandr2 libpango-1.0-0
+
+      - name: Run fetcher
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node index.js
