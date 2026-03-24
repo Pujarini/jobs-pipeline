@@ -5,7 +5,10 @@ async function fetchGoogle() {
         "https://www.google.com/about/careers/applications/jobs/results?target_level=MID&employment_type=FULL_TIME&location=India&q=%22Software%20Engineer%20III%22";
 
     try {
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        });
         const page = await browser.newPage();
 
         await page.goto(url, { waitUntil: "networkidle2" });

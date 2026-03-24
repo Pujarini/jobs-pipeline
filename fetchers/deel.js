@@ -5,7 +5,10 @@ async function fetchDeel() {
         "https://www.deel.com/careers/open-roles/?location=India&team=Engineering";
 
     try {
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        });
         const page = await browser.newPage();
 
         await page.goto(url, { waitUntil: "networkidle2" });

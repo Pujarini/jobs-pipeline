@@ -5,7 +5,10 @@ async function fetchOkta() {
         "https://www.okta.com/company/careers/job-listing/?keywords=UI&department=4183&location=5997";
 
     try {
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        });
         const page = await browser.newPage();
 
         await page.goto(url, { waitUntil: "networkidle2" });

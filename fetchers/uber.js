@@ -4,7 +4,10 @@ async function fetchUber() {
     const url =
         "https://www.uber.com/in/en/careers/list/?department=Engineering&location=IND-Karn%C4%81taka-Bangalore&team=Frontend";
 
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    });
     const page = await browser.newPage();
 
     await page.goto(url, { waitUntil: "networkidle2" });
