@@ -91,4 +91,12 @@ async function run() {
     }
 }
 
-run();
+run()
+    .then(() => {
+        console.log("Done!");
+        process.exit(0); // 👈 force exit
+    })
+    .catch((err) => {
+        console.error("Error:", err);
+        process.exit(1);
+    });

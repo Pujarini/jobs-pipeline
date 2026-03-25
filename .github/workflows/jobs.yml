@@ -9,13 +9,9 @@ on:
       - develop
 
 jobs:
-  build:
-    timeout-minutes: 30 # kill after 30 mins
-    steps:
-      - name: Some step
-        timeout-minutes: 10
   fetch:
     runs-on: ubuntu-latest
+    timeout-minutes: 15 # 👈 added here
 
     steps:
       - uses: actions/checkout@v4
